@@ -148,4 +148,77 @@ body {
     font-weight: bold;
     color: #000; /* Text color inside Pokémon cards (black) */
   }
+
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    margin-top: 20px;
+  }
   
+  .not-found-image {
+    max-width: 500px;
+    max-height: 450px;
+    margin-bottom: 10px;
+  }
+
+
+  /* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  width: auto; /* Let the width adjust automatically */
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  top: 100%;
+  left: 0;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* Dropdown links */
+.dropdown-content a {
+  color: #333;
+  padding: 8px 12px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s;
+}
+/* Dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show dropdown content on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.capture-button {
+  position: absolute;
+  bottom: 23px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: none; /* Initially hide the capture button */
+}
+
+.capture-button img {
+  width: 40px;
+  height: 40px;
+}
+
+.pokemon-card.flipped .capture-button {
+  display: block; /* Show the capture button when the card is flipped */
+}
