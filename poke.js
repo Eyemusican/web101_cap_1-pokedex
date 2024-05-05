@@ -41,6 +41,7 @@ function displayPokemonDetails(pokemonData, speciesData) {
 }
 
 
+
 // Display the list of Pokemon cards
 async function displayPokemonCards(generation) {
   const pokemonList = await fetchPokemonList(generation);
@@ -53,27 +54,29 @@ async function displayPokemonCards(generation) {
     const pokemonCard = document.createElement('div');
     pokemonCard.classList.add('pokemon-card');
     pokemonCard.innerHTML = `
-      <div class="pokemon-card-front">
-        <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}" class="pokemon-image">
-        <div>
-          <h3>${pokemonData.name}</h3>
-          <p>Weight: ${pokemonData.weight / 10} (Kg)</p>
-          <p>Height: ${pokemonData.height / 10} (m)</p>
-        </div>
-        <button class="capture-button">
-          <img src="path/to/pokeball.gif" alt="Capture">
-        </button>
-      </div>
-      <div class="pokemon-card-back">
-        <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}" class="pokemon-image">
-        <div class="pokemon-details">
-          ${displayPokemonDetails(pokemonData, speciesData).outerHTML}
-        </div>
-        <button class="capture-button">
-          <img src=assets/2860d2d8c3a1e402e0fc8913cd92cd7a_w200.gif>
-        </button>
-      </div>
-    `;
+    <div class="pokemon-card-front">
+    <span class="pokemon-id">#${pokemonData.id}</span>
+    <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}" class="pokemon-image">
+    <div>
+      <h3>${pokemonData.name}</h3>
+      <p>Weight: ${pokemonData.weight / 10} (Kg)</p>
+      <p>Height: ${pokemonData.height / 10} (m)</p>
+    </div>
+    <button class="capture-button">
+      <img src="path/to/pokeball.gif" alt="Capture">
+    </button>
+  </div>
+  <div class="pokemon-card-back">
+    <span class="pokemon-id">#${pokemonData.id}</span>
+    <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}" class="pokemon-image">
+    <div class="pokemon-details">
+      ${displayPokemonDetails(pokemonData, speciesData).outerHTML}
+    </div>
+    <button class="capture-button">
+      <img src=assets/2860d2d8c3a1e402e0fc8913cd92cd7a_w200.gif>
+    </button>
+  </div>
+`;
 
     pokemonCard.addEventListener('mouseover', () => {
       pokemonCard.classList.add('flipped');
@@ -91,7 +94,6 @@ async function displayPokemonCards(generation) {
     mainElement.appendChild(pokemonCard);
   });
 }
-
 // Display a single Pokemon's data
 async function displayPokemonData(pokemonIdentifier) {
   const mainElement = document.querySelector('main');
@@ -104,22 +106,24 @@ async function displayPokemonData(pokemonIdentifier) {
     const pokemonCard = document.createElement('div');
     pokemonCard.classList.add('pokemon-card');
     pokemonCard.innerHTML = `
-      <div class="pokemon-card-front">
-        <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}" class="pokemon-image">
-        <div>
-          <h3>${pokemonData.name}</h3>
-          <p>Weight: ${pokemonData.weight / 10} (Kg)</p>
-          <p>Height: ${pokemonData.height / 10} (m)</p>
-        </div>
+    <div class="pokemon-card-front">
+      <span class="pokemon-id">#${pokemonData.id}</span>
+      <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}" class="pokemon-image">
+      <div>
+        <h3>${pokemonData.name}</h3>
+        <p>Weight: ${pokemonData.weight / 10} (Kg)</p>
+        <p>Height: ${pokemonData.height / 10} (m)</p>
       </div>
-      <div class="pokemon-card-back">
-        <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}" class="pokemon-image">
-        <div class="pokemon-details">
-          ${displayPokemonDetails(pokemonData, speciesData).outerHTML}
-        </div>
-        <img src="assets/2860d2d8c3a1e402e0fc8913cd92cd7a_w200.gif" alt="Capture" class="capture-gif">
+    </div>
+    <div class="pokemon-card-back">
+      <span class="pokemon-id">#${pokemonData.id}</span>
+      <img src="${pokemonData.sprites.front_default}" alt="${pokemonData.name}" class="pokemon-image">
+      <div class="pokemon-details">
+        ${displayPokemonDetails(pokemonData, speciesData).outerHTML}
       </div>
-    `;
+      <img src="assets/2860d2d8c3a1e402e0fc8913cd92cd7a_w200.gif" alt="Capture" class="capture-gif">
+    </div>
+  `;
 
     pokemonCard.addEventListener('mouseover', () => {
       pokemonCard.classList.add('flipped');
