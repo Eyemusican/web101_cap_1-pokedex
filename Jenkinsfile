@@ -1,58 +1,72 @@
 pipeline {
     agent any
-
+    
     tools {
-        nodejs 'NodeJS-20.x'  
+        nodejs 'NodeJS-20.x'  // Keep the same tool name that's working
     }
-
+    
     environment {
-        
-        NODE_ENV = 'production'
+        CI = 'true'
+        DOCKER_IMAGE = 'eyemusician/pokedex-app'  // Change this to your Docker Hub username
+        DOCKER_TAG = "${BUILD_NUMBER}"
     }
-
+    
     stages {
         stage('Checkout') {
             steps {
-                echo 'Checking out the code...'
                 checkout scm
             }
         }
-
+        
         stage('Install Dependencies') {
             steps {
-                echo 'Installing npm packages...'
-                bat 'npm install'
+                sh 'npm install'
             }
         }
-
+        
         stage('Build') {
             steps {
-                echo 'Building the project...'
-                bat 'npm run build'
+                sh 'npm run build'
             }
         }
-
+        
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                bat 'npm test'
+                sh 'npm test'
             }
         }
-
-        stage('Deploy to Production') {
+        
+        // NEW DOCKER STAGES ADDED HERE
+        stage('Build Docker Image') {
             steps {
-                echo 'Deploying application to production...'
-                bat 'npm run deploy:prod'
+                script {
+                    docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
+                    docker.build("${DOCKER_IMAGE}:latest")
+                }
+            }
+        }
+        
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerhub-credentials') {
+                        docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").push()
+                        docker.image("${DOCKER_IMAGE}:latest").push()
+                    }
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                sh 'npm run deploy:prod'
             }
         }
     }
-
+    
     post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed. Please check the logs.'
+        always {
+            sh 'docker image prune -f'
         }
     }
 }
