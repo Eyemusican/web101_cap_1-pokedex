@@ -1,0 +1,20 @@
+{
+  "name": "web101_cap_1-pokedex",
+  "version": "1.0.0",
+  "description": "Static Pokedex project",
+  "main": "poke.js",
+  "scripts": {
+    "build": "echo 'Simulating build...'",
+    "start": "node poke.js",
+    "dev": "vite",
+    "test": "echo 'Simulating test...'",
+    "deploy:prod": "echo 'Deploying to production...'",
+    "deploy:stage": "echo 'Deploying to staging...'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+}

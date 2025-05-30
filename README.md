@@ -1,5 +1,7 @@
 "# web101_cap_1-pokedex" 
 
+#### how to start : npm run dev 
+
 ### Pokemon Web App
 
 The Pokemon Web App is a fun and interactive website that allows users to explore and discover information about various Pokemon species. It uses PokeAPI to fetch Pokemon data and provides a visually appealing and user-friendly interface for browsing and capturing Pokemon.
