@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     tools {
-        nodejs 'NodeJS'  // Make sure this matches your Jenkins global tool name for Node.js
+        nodejs 'NodeJS-20.x'  
     }
 
     environment {
-        // You can set environment variables here if needed
+        
         NODE_ENV = 'production'
     }
 
