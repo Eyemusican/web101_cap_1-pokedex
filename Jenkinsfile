@@ -1,13 +1,14 @@
+
 pipeline {
     agent any
     
     tools {
-        nodejs 'NodeJS-20.x'  // Keep the same tool name that's working
+        nodejs 'NodeJS-20.x'
     }
     
     environment {
         CI = 'true'
-        DOCKER_IMAGE = 'eyemusician/pokedex-app'  // Change this to your Docker Hub username
+        DOCKER_IMAGE = 'eyemusician/pokedex-app'  
         DOCKER_TAG = "${BUILD_NUMBER}"
     }
     
@@ -20,23 +21,22 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'  
             }
         }
         
         stage('Build') {
             steps {
-                sh 'npm run build'
+                bat 'npm run build'  
             }
         }
         
         stage('Test') {
             steps {
-                sh 'npm test'
+                bat 'npm test'  
             }
         }
         
-        // NEW DOCKER STAGES ADDED HERE
         stage('Build Docker Image') {
             steps {
                 script {
@@ -59,14 +59,14 @@ pipeline {
         
         stage('Deploy') {
             steps {
-                sh 'npm run deploy:prod'
+                bat 'npm run deploy:prod'  
             }
         }
     }
     
     post {
         always {
-            sh 'docker image prune -f'
+            bat 'docker image prune -f'  
         }
     }
 }
